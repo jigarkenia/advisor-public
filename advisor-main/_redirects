@@ -1,0 +1,4 @@
+# Holiday Calendar — route any state slug to the dynamic template page
+# Example: /library/holiday-calendar/karnataka/ serves the template,
+# which reads "karnataka" from the URL path and renders that state's data.
+/library/holiday-calendar/:state/  /library/holiday-calendar/state-template.html  200
