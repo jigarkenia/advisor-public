@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Holiday Calendar 2026 — All Indian States | Labour Codes Advisor</title>
+  <meta name="description" content="Free state-wise government holiday calendar for 2026, covering 28 Indian states and union territories. National, regional, and restricted holidays — no login required." />
+  <link rel="canonical" href="https://labourcodesadvisor.com/library/holiday-calendar/" />
+  <meta property="og:title" content="Government Holiday Calendar 2026 — All Indian States" />
+  <meta property="og:description" content="Free state-wise holiday calendar for 2026 across 28 Indian states and union territories." />
+  <meta property="og:url" content="https://labourcodesadvisor.com/library/holiday-calendar/" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#1a2e1a" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Government Holiday Calendar 2026 — All Indian States",
+    "description": "A free collection of state-wise government holiday calendars for 2026 across India.",
+    "url": "https://labourcodesadvisor.com/library/holiday-calendar/",
+    "isAccessibleForFree": true,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Labour Codes Advisor",
+      "url": "https://labourcodesadvisor.com/"
+    }
+  }
+  </script>
+
+  <style>
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 40px 0 56px;
+    }
+    .state-card {
+      background: var(--white);
+      border: 1px solid var(--paper2);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .state-card:hover { border-color: var(--leaf2); transform: translateY(-2px); }
+    .state-card h3 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .state-card p { font-size: 12.5px; color: var(--ink3); }
+
+    @media (max-width: 900px) { .state-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .state-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .state-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header id="site-header"></header>
+
+  <main>
+    <div class="container">
+      <div id="library-content">
+      <div class="page-hero">
+        <p class="eyebrow">Library · Free Resource</p>
+        <h1>Government Holiday Calendar 2026</h1>
+        <p>Official state-wise holiday lists for 2026 — national, regional, and restricted holidays across 28 Indian states and union territories. Free, no login required.</p>
+      </div>
+
+      <div id="state-grid" class="state-grid">
+        <div style="text-align:center; color: var(--ink3); grid-column: 1/-1;">Loading states…</div>
+      </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="/assets/js/layout.js"></script>
+  <script>
+    async function loadStates() {
+      const grid = document.getElementById('state-grid');
+      try {
+        const res = await fetch('/library/holiday-calendar/data/holidays.json');
+        const data = await res.json();
+
+        const states = Object.values(data).sort(function (a, b) {
+          return a.state.localeCompare(b.state);
+        });
+
+        grid.innerHTML = states.map(function (s) {
+          return (
+            '<a class="state-card" href="/library/holiday-calendar/' + s.slug + '/">' +
+              '<h3>' + s.state + '</h3>' +
+              '<p>' + s.holidayCount + ' holidays · 2026</p>' +
+            '</a>'
+          );
+        }).join('');
+      } catch (err) {
+        grid.innerHTML = '<div style="text-align:center; color: var(--ink3); grid-column: 1/-1;">Could not load the state list right now.</div>';
+      }
+    }
+    loadStates();
+  </script>
+
+</body>
+</html>
